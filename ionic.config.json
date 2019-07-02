@@ -1,5 +1,7 @@
 {
   "name": "Univesidad",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

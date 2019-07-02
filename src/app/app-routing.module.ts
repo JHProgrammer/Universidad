@@ -4,17 +4,42 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'intranet',
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
+    path: 'intranet',
+    loadChildren: './intranet/intranet.module#IntranetPageModule'
   },
   {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
+    path: 'cafeteria',
+    loadChildren: './cafeteria/cafeteria.module#CafeteriaPageModule'
+  },
+  //GNM----
+  {
+    path: 'eventos',
+    loadChildren: './eventos/eventos.module#EventosPageModule'
+  },
+  {
+    path: 'noticias',
+    loadChildren: './noticias/noticias.module#NoticiasPageModule'
+  },
+  {
+    path: 'mapa',
+    loadChildren: './mapa/mapa.module#MapaPageModule'
+  },
+  {
+    path: 'redessociales',
+    loadChildren: './redessociales/redessociales.module#RedesSocialesPageModule'
+  },
+  {
+    path: 'emergencia',
+    loadChildren: './emergencia/emergencia.module#EmergenciaPageModule'
   }
+
+
+
+  //GNM----
 ];
 
 @NgModule({
