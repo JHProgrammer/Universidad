@@ -24,6 +24,9 @@ export class MapaPage implements OnInit{
   
   map: GoogleMap;
   loading: any;
+  public locations;
+  public locationsMap;
+  
   constructor(
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
@@ -42,8 +45,8 @@ export class MapaPage implements OnInit{
     this.map = GoogleMaps.create('map_canvas', {
       camera: {
         target: {
-          lat: 43.0741704,
-          lng: -89.3809802
+          lat: -12.0615148,
+          lng: -77.1176127
         },
         zoom: 18,
         tilt: 30
@@ -54,6 +57,31 @@ export class MapaPage implements OnInit{
 
   async onButtonClick() {
     this.map.clear();
+    this.locations = [{
+      "FIIS": {
+          "latLng":  { 
+              "lat": -12.0615148,
+              "lng": -77.1176127   
+          }
+      },
+      "FCA": {
+        "latLng":  { 
+            "lat": -12.0609119,
+            "lng": -77.116725
+        }
+    },
+    "FCM": {
+      "latLng":  { 
+          "lat": -12.0620411,
+          "lng": -77.1175513
+      }
+  }
+  }];
+  this.locationsMap = [];
+  for (let index = 0; index < this.locations.length; index++) {
+    this.locationsMap.push(this.locations[index].latLng);
+    
+  }
 
     this.loading = await this.loadingCtrl.create({
       message: 'Please wait...'
@@ -63,20 +91,25 @@ export class MapaPage implements OnInit{
     // Get the location of you
     this.map.getMyLocation().then((location: MyLocation) => {
       this.loading.dismiss();
-      console.log(JSON.stringify(location, null ,2));
-
+      alert(JSON.stringify(location, null ,2));
+      
+      alert(JSON.stringify(this.locations, null ,2));
       // Move the map camera to the location with animation
       this.map.animateCamera({
-        target: location.latLng,
+        target: this.locationsMap.latLng,
+        // target: {
+        //   lat: -12.0618127,
+        //   lng: -77.1195191,
+        // },
         zoom: 17,
         tilt: 30
       });
 
       // add a marker
       let marker: Marker = this.map.addMarkerSync({
-        title: '@ionic-native/google-maps plugin!',
-        snippet: 'This plugin is awesome!',
-        position: location.latLng,
+        title: 'Facultad Ingenieria de Sistemas',
+        snippet: 'FIIS',
+        position: this.locations.latLng,
         animation: GoogleMapsAnimation.BOUNCE
       });
 
